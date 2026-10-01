@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uav-nav"
+version = "0.1.0"
+description = "Simulation-based autonomous UAV navigation with deep reinforcement learning"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "gymnasium",
+    "stable-baselines3",
+    "torch",
+    "numpy",
+    "pyyaml",
+    "matplotlib",
+    "tensorboard",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+wandb = ["wandb"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests", "scripts"]
