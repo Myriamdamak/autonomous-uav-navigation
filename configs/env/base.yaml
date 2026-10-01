@@ -10,3 +10,34 @@ dynamics:
   max_speed_z: 2.0     # m/s, vertical
   max_yaw_rate: 1.5    # rad/s
   max_accel: 4.0       # m/s^2
+
+drone:
+  radius: 0.3          # collision radius of the drone (m)
+
+task:
+  max_steps: 600             # episode time limit (600 * 0.05 s = 30 s)
+  goal_tolerance: 0.5        # success if closer than this to the goal (m)
+  spawn_margin: 1.0          # keep start/goal this far from the arena walls (m)
+  start_goal_min_distance: 8.0
+  spawn_clearance: 1.5       # obstacles keep this far (surface) from start and goal (m)
+
+obstacles:
+  num_min: 0                 # empty arena by default (Stage 3 starts here)
+  num_max: 0
+  radius_min: 0.5
+  radius_max: 1.5
+
+observation:
+  num_nearest_obstacles: 4   # K
+
+reward:
+  w_progress: 1.0            # per meter of progress toward the goal
+  w_goal: 10.0               # bonus for reaching the goal
+  w_collision: 10.0          # penalty for a collision
+  w_bounds: 10.0             # penalty for leaving the arena
+  w_time: 0.01               # constant cost per step
+  # Optional terms, disabled (0.0) until a failure mode justifies them:
+  w_safe: 0.0
+  safe_distance: 1.0
+  w_control: 0.0
+  w_smooth: 0.0
